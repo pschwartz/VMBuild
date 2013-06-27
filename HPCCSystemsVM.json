@@ -3,7 +3,12 @@
 	"staging": "10.176.32.5",
 	"stagingUser": "ubuntu",
 	"buildDir": "/u/tBuilds",
-	"baseName": "HPCCSystemsVM-",
-    "packageBase": "hpccsystems-platform_community-",
-    "packagePost": "precise_i386.deb"
+	"baseName": "HPCCSystemsVM",
+    "packageBase": "hpccsystems-platform_community",
+    "packagePost": "precise_i386.deb",
+    "templates": [
+        "build.sh.in",
+        "provision.sh.in",
+        "Vagrantfile.in"
+    ]
 }

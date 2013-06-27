@@ -1,4 +1,5 @@
 from __future__ import print_function
+import os
 import simplejson as json
 
 
@@ -18,11 +19,26 @@ class Config(object):
             return None
 
     @property
+    def name(self):
+        return "{baseName}-{version}".format(baseName=self.baseName,
+                                             version=self.version
+                                             )
+
+    @property
     def package(self):
-        return "{base}{version}{post}".format(base=self.packageBase,
+        return "{base}-{version}{post}".format(base=self.packageBase,
                                               version=self.version,
                                               post=self.packagePost,
                                               )
+
+    @property
+    def templateDir(self):
+        return "{dir}/{template}".format(dir=os.path.abspath(os.path.curdir),
+                                         template=self.template
+                                         )
+    def templateFile(self, temp):
+        return "{dir}/{temp}".format(dir=self.templateDir, temp=temp)
+
 
     @property
     def localPackage(self):

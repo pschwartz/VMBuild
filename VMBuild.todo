@@ -1,0 +1,12 @@
+VMBuild:
+ ✔ Create paramiko based scp engine @done (13-06-26 21:53)
+ ✔ Create template read/replace engine @done (13-06-26 21:53)
+ ✔ Create config engine @done (13-06-26 21:53)
+ ✔ Create cli main @done (13-06-26 21:53)
+ ☐ Create requests based wget
+ ☐ Create status indicator for actions 0%...10%..........
+ ☐ Create template build engine
+ ☐ Create checks for box already added
+ ☐ Create add box if not present
+ ☐ CWD to build dest and run build
+ ☐ Move built distribution to staging

@@ -12,6 +12,6 @@ Vagrant.configure("2") do |config|
     vb.name = "{{NAME}}"
     vb.customize ["modifyvm", :id, "--memory", "1536"]
   end
-  config.vm.provision :shell, :path => "{{NAME}}.sh"
+  config.vm.provision :shell, :path => "provision.sh"
 end
 

@@ -5,6 +5,7 @@ import argparse
 
 from vmgen.config import Config
 from vmgen.scp import SCP
+from vmgen.template import Template
 
 def main():
     parser = argparse.ArgumentParser("Generate a Vagrant VM Build.")
@@ -32,11 +33,21 @@ def main():
         conf.addConfigItem("key", args.key)
         conf.addConfigItem("version", args.version)
         conf.addConfigItem("build", args.build)
-        print(conf.localPackage)
-        print(conf.remotePackage)
 
-        sClient = SCP.SCPFactory(conf)
-        sClient.get(conf.remotePackage, conf.dest)
+        #sClient = SCP.SCPFactory(conf)
+        #sClient.get(conf.remotePackage, conf.dest)
+
+
+        rep = [
+            ("{{NAME}}", conf.name),
+            ("{{PACKAGE}}", conf.package),
+            ("{{VERSION}}", conf.version)
+        ]
+
+        for temp in conf.templates:
+            Template.TemplateFactory(conf, conf.templateFile(temp), rep).write()
+
+        #print(temp.txt)
 
 
     except Exception as e:
