@@ -30,9 +30,9 @@ class Template(object):
         return txt
 
     @staticmethod
-    def TemplateFactory(config, temp, rep):
+    def TemplateFactory(config, temp, rep=True):
         temp = Template(config, temp)
-        for k,v in rep:
-            temp.replaceParam(k,v)
+        if rep:
+            for k,v in config.replace.items():
+                temp.replaceParam(k,getattr(config, v))
         return temp
-

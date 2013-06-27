@@ -32,6 +32,11 @@ class Config(object):
                                               )
 
     @property
+    def configDir(self):
+        return "{dir}".format(dir=os.path.abspath(os.path.curdir))
+
+
+    @property
     def templateDir(self):
         return "{dir}/{template}".format(dir=os.path.abspath(os.path.curdir),
                                          template=self.template
