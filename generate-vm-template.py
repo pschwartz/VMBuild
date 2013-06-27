@@ -3,6 +3,7 @@
 from __future__ import print_function
 import argparse
 import logging
+import os
 import paramiko
 import sys
 
@@ -52,7 +53,7 @@ def main():
         conf = Config.ConfigFactory_fromJson("HPCCSystemsVM.json")
         conf.addConfigItem("template", args.template)
         conf.addConfigItem("dest", args.dest+"/"+args.version)
-        conf.addConfigItem("key", args.key)
+        conf.addConfigItem("key", os.path.abspath(args.key))
         conf.addConfigItem("version", args.version)
         conf.addConfigItem("build", args.build)
         gen = Generator.GeneratorFactory(conf)
