@@ -1,3 +1,5 @@
+from __future__ import print_function
+import logging
 from paramiko import SSHClient, AutoAddPolicy
 
 
@@ -9,8 +11,11 @@ class SSH(object):
         self.client.load_system_host_keys()
 
     def connect(self, server, user, key):
+        logging.info("Connecting to {u}@{s} [with key:{k}]".format(
+            u=user, s=server, k=key
+        ))
         self.client.connect(server, username=user,
-                       key_filename=key)
+                       key_filename=key, timeout=2.0)
 
     def close():
         self.client.close()
@@ -22,6 +27,7 @@ class SSH(object):
 
     @staticmethod
     def SSHFactory(config):
+        logging.debug("Creating SSH Object.")
         sClient = SSH()
         sClient.connect(config.staging,
                         config.stagingUser,

@@ -1,11 +1,14 @@
+from __future__ import print_function
+import logging
 import os
 
 class Template(object):
     """docstring for Template"""
-    def __init__(self, config, temp):
+    def __init__(self, config, fn):
         self.config = config
-        self.file = Template.getfile(temp)
-        self.txt = Template.readfile(temp)
+        self.temp = Template.getfile(fn, False)
+        self.file = Template.getfile(fn)
+        self.txt = Template.readfile(fn)
 
     def replaceParam(self, key, value):
         self.txt = self.txt.replace(key, value)
@@ -17,11 +20,17 @@ class Template(object):
 
     def write(self):
         with open(self.outFile, 'w+') as f:
+            logging.info("Generating [{}] from [{}]".format(self.outFile, self.temp))
             f.write(self.txt)
+        if self.outFile.find(".sh") != -1:
+            os.chmod(self.outFile, 0755)
 
     @staticmethod
-    def getfile(fn):
-        return os.path.basename(fn).replace(".in", "")
+    def getfile(fn, rm=True):
+        name = os.path.basename(fn)
+        if rm:
+            return name.replace(".in", "")
+        return name
 
     @staticmethod
     def readfile(fn):
@@ -30,9 +39,10 @@ class Template(object):
         return txt
 
     @staticmethod
-    def TemplateFactory(config, temp, rep=True):
-        temp = Template(config, temp)
+    def TemplateFactory(config, fn, rep=True):
+        logging.debug("Creating Template Object for [{}]".format(fn))
+        temp = Template(config, fn)
         if rep:
-            for k,v in config.replace.items():
-                temp.replaceParam(k,getattr(config, v))
+            for k, v in config.replace.items():
+                temp.replaceParam(k, getattr(config, v))
         return temp

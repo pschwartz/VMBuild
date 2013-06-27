@@ -1,4 +1,5 @@
 from __future__ import print_function
+import logging
 import os
 import simplejson as json
 
@@ -17,6 +18,9 @@ class Config(object):
             return self.config[name]
         except KeyError:
             return None
+
+    def logging(self, logger):
+        self.logger = logger
 
     @property
     def name(self):
@@ -63,6 +67,12 @@ class Config(object):
                     build=self.build,
                     package=self.package
                     )
+        elif self.stagingMethod == "local":
+            return "file://{dir}/{build}/bin/platform/{package}".format(
+                    dir=self.buildDir,
+                    build=self.build,
+                    package=self.package
+                    )
         else:
             raise Exception("Invalid stagingMethod [{}]".format(self.stagingMethod))
 
@@ -73,5 +83,6 @@ class Config(object):
 
     @staticmethod
     def ConfigFactory_fromJson(jsonFile):
+        logging.info("Creating Config obect from [{}]".format(jsonFile))
         config = Config.loadJson(jsonFile)
         return Config(config)
