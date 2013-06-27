@@ -5,7 +5,8 @@ VMBuild:
  ✔ Create cli main @done (13-06-26 21:53)
  ☐ Create requests based wget
  ☐ Create status indicator for actions 0%...10%..........
- ☐ Create template build engine
+ ✔ Create template build engine @done (13-06-26 22:42)
+ ☐ Create build generator
  ☐ Create checks for box already added
  ☐ Create add box if not present
  ☐ CWD to build dest and run build
