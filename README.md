@@ -42,4 +42,4 @@ Configuration
 
 To configure, modify HPCCSystemsVM.json.
 
-Currently only one stagingMethod works, "ssh".
+Currently only two stagingMethod works, "ssh" or "http".
