@@ -12,9 +12,9 @@ class SCP(object):
     def put(self, files, remote_path='.', recursive=False,
             preserve_times=False):
         files_str = " ".join(files)
-        logging.info("scp {files} {remote}".format(files=files_str,
-                                                   remote=remote_path
-                                                   ))
+        logging.info("Downloading over ssh [{files}] {remote}".format(
+            files=files_str, remote=remote_path
+        ))
         self.client.put(files, remove_path, recursive, preserve_times)
 
     def get(self, remote_path, local_path='.', recursive=False,

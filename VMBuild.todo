@@ -3,7 +3,7 @@ VMBuild:
  ✔ Create template read/replace engine @done (13-06-26 21:53)
  ✔ Create config engine @done (13-06-26 21:53)
  ✔ Create cli main @done (13-06-26 21:53)
- ☐ Create requests based wget
+ ✔ Create requests based wget @done (13-06-27 22:43)
  ☐ Create status indicator for actions 0%...10%..........
  ✔ Create template build engine @done (13-06-26 22:42)
  ✔ Create build generator @done (13-06-27 09:12)
