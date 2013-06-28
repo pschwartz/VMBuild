@@ -4,7 +4,6 @@ import os
 import shutil
 
 from vmgen.template import Template
-from vmgen.scp import SCP
 
 
 class Generator(object):
@@ -14,10 +13,13 @@ class Generator(object):
 
     def getPackage(self):
         if self.config.stagingMethod == "ssh":
+            from vmgen.scp import SCP
             sClient = SCP.SCPFactory(self.config)
             sClient.get(self.config.remotePackage, self.config.dest)
         elif self.config.stagingMethod == "http":
-            pass
+            from vmgen.http import HTTP
+            hClient = HTTP.HTTPFactory(self.config)
+            hClient.downloadPackage()
         elif self.config.stagingMethod == "local":
             pass
         else:
